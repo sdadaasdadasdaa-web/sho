@@ -1,5 +1,4 @@
-# ── Estágio 1: Build ──────────────────────────────────────────
-FROM node:20-alpine AS builder
+FROM node:20-alpine
 
 WORKDIR /app
 
@@ -9,18 +8,7 @@ RUN npm install --legacy-peer-deps
 COPY . .
 RUN npm run build
 
-# ── Estágio 2: Produção ───────────────────────────────────────
-FROM node:20-alpine AS runner
-
-WORKDIR /app
-
 ENV NODE_ENV=production
-
-COPY package*.json ./
-RUN npm install --legacy-peer-deps --omit=dev
-
-COPY --from=builder /app/dist ./dist
-
 EXPOSE 3000
 
 CMD ["node", "dist/index.js"]
