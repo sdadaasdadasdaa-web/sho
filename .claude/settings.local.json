@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node -e \":*)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" -H \"x-public-key: jefersonofi8-0-5_8wzfmv6ocw6msb8e\" -H \"x-secret-key: iaaqj8y44w5f7fos4noshebn70afkp5o12k0h16b20e9rtgkw8ajw2h7segtss09\" \"https://app.sigilopay.com.br/api/v1/gateway/credentials/test\")",
+      "Bash(curl -s -H \"x-public-key: jefersonofi8-0-5_8wzfmv6ocw6msb8e\" -H \"x-secret-key: iaaqj8y44w5f7fos4noshebn70afkp5o12k0h16b20e9rtgkw8ajw2h7segtss09\" \"https://app.sigilopay.com.br/api/v1/gateway/credentials/test\")",
+      "Bash(curl -s -w \"\\\\nHTTP_CODE:%{http_code}\" -H \"x-public-key: jefersonofi8-0-5_8wzfmv6ocw6msb8e\" -H \"x-secret-key: iaaqj8y44w5f7fos4noshebn70afkp5o12k0h16b20e9rtgkw8ajw2h7segtss09\" \"https://app.sigilopay.com.br/api/v1/gateway/transactions?id=test\")",
+      "Bash(node test_pedidos.mjs)",
+      "Bash(pnpm install:*)",
+      "Bash(npm install:*)",
+      "Bash(node test_pedidos_sigilopay.mjs)",
+      "Bash(cp /tmp/shopee_logo_1.jpg \"C:/Users/User/Documents/shopee-store reserva 02/client/public/shopee-logo-color.jpg\")",
+      "Bash(cp /tmp/shopee_logo_2.png \"C:/Users/User/Documents/shopee-store reserva 02/client/public/shopee-logo-white.png\")",
+      "Bash(python3 -c \":*)"
+    ]
+  }
+}

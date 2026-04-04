@@ -1,0 +1,22 @@
+{
+  "query": "SELECT COUNT(*) as total FROM orders; SELECT * FROM orders ORDER BY id DESC LIMIT 5;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway04.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 43RNy7J3TcfnUUX.root --database T9MpEVnAhq2PrGidiTemVi --execute SELECT COUNT(*) as total FROM orders; SELECT * FROM orders ORDER BY id DESC LIMIT 5;",
+  "rows": [
+    {
+      "total": "2"
+    },
+    {
+      "total": "id\ttransactionId\texternalRef\tcustomerName\tcustomerEmail\tcustomerPhone\tcustomerCpf\tproductsJson\ttotalInCents\ttrackingParamsJson\tstatus\tcreatedAt\tpaidAt"
+    },
+    {
+      "total": "2\tcmn3kiwq00lm91ro5tfk3sv7i\tACHA-d8Ybk_KEdO\tMaria Santos\tmaria@teste.com\t21988888888\t52998224725\t[{\"id\":\"item-1\",\"name\":\"Produto A\",\"quantity\":2,\"priceInCents\":10000}]\t11985\tNULL\tpending\t2026-03-23 19:17:58\tNULL"
+    },
+    {
+      "total": "1\tcmn3kiv0y0lm01ro5j21xia1u\tACHA-MesCxzoGKQ\tJoão da Silva\tjoao@teste.com\t86942083736\t21643504053\t[{\"id\":\"product-21\",\"name\":\"Roçadeira Nakasaki 75cc\",\"quantity\":1,\"priceInCents\":8990}]\t8990\tNULL\tpending\t2026-03-23 19:17:56\tNULL"
+    }
+  ],
+  "messages": [],
+  "stdout": "total\n2\nid\ttransactionId\texternalRef\tcustomerName\tcustomerEmail\tcustomerPhone\tcustomerCpf\tproductsJson\ttotalInCents\ttrackingParamsJson\tstatus\tcreatedAt\tpaidAt\n2\tcmn3kiwq00lm91ro5tfk3sv7i\tACHA-d8Ybk_KEdO\tMaria Santos\tmaria@teste.com\t21988888888\t52998224725\t[{\"id\":\"item-1\",\"name\":\"Produto A\",\"quantity\":2,\"priceInCents\":10000}]\t11985\tNULL\tpending\t2026-03-23 19:17:58\tNULL\n1\tcmn3kiv0y0lm01ro5j21xia1u\tACHA-MesCxzoGKQ\tJoão da Silva\tjoao@teste.com\t86942083736\t21643504053\t[{\"id\":\"product-21\",\"name\":\"Roçadeira Nakasaki 75cc\",\"quantity\":1,\"priceInCents\":8990}]\t8990\tNULL\tpending\t2026-03-23 19:17:56\tNULL\n",
+  "stderr": "",
+  "execution_time_ms": 94
+}

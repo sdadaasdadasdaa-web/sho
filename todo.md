@@ -1,0 +1,142 @@
+# TODO - AchaShop Atualização
+
+- [x] Acessar Shopee Brasil e coletar ferramentas mais vendidas (5.000+ vendidos)
+- [x] Coletar nome, preço, imagem, avaliação, quantidade vendida de cada produto
+- [x] Atualizar data.ts com os produtos reais de ferramentas
+- [x] Atualizar categorias para focar em ferramentas
+- [x] Implementar order bump no checkout
+- [x] Melhorar descrições dos produtos (mais detalhadas e profissionais)
+- [x] Atualizar banners para tema de ferramentas
+- [x] Testar fluxo completo (Home → Produto → Carrinho → Checkout com Order Bump)
+- [x] Salvar checkpoint e entregar ao usuário
+- [x] Resolver conflitos do upgrade full-stack (Home.tsx)
+- [x] Configurar chave API BYNET como secret
+- [x] Criar endpoint backend para criar transação BYNET (PIX)
+- [x] Atualizar checkout frontend para integrar com API BYNET
+- [x] Criar página PaymentPix com QR Code, timer e verificação de status
+- [x] Testar fluxo completo de pagamento
+- [x] Adicionar campo CPF ao formulário de checkout
+- [x] Validação de formulário com mensagens de erro
+- [x] Bug: QR Code e código copia-e-cola PIX não aparecem na página de pagamento
+- [x] Adicionar script pixel UTMify no head de todas as páginas
+- [x] Configurar credencial API UTMify como secret
+- [x] Criar módulo backend para enviar eventos à API UTMify
+- [x] Enviar evento "pedido pendente" quando cliente gera PIX
+- [x] Enviar evento "pedido pago" quando pagamento é confirmado
+- [x] Capturar UTM parameters da URL e enviar para UTMify
+- [x] Testar integração completa UTMify
+- [x] Corrigir pixel UTMify para disparar em TODAS as páginas (Home, Produto, Carrinho, Checkout, Pagamento)
+- [x] Disparar eventos UTMify corretos: PageView, InitiateCheckout, Purchase
+- [x] Adicionar timer de urgência 30 minutos na página do produto (acima do preço)
+- [x] Adicionar timer de urgência 30 minutos no checkout (lugar estratégico)
+- [x] Bug: Notificações UTMify não estão sendo enviadas (pedido pendente e pago)
+- [x] Verificar formato correto da API UTMify e corrigir envio
+- [x] Verificar se pixel UTMify está disparando eventos corretamente no frontend
+- [x] Implementar proxy server-side para eventos UTMify (PageView, IC) via tRPC
+- [x] Atualizar UtmifyTracker frontend para enviar eventos via proxy server-side
+- [x] Persistir sck no localStorage (utms/latest.js não salva sck)
+- [x] Coletar imagens do produto Máquina de Solda IGBT 250A da Shopee
+- [x] Coletar depoimentos com fotos/vídeos e fotos de perfil dos compradores
+- [x] Fazer upload de todas as mídias para CDN
+- [x] Adicionar produto ao data.ts com todas as informações
+- [x] Configurar order bumps específicos para a Máquina de Solda
+- [x] Adicionar depoimentos com fotos/vídeos ao productReviews
+- [x] Testar página do produto e fluxo de compra
+- [x] Upload das novas fotos reais de clientes para CDN (18 fotos)
+- [x] Atualizar depoimentos com fotos reais de pessoas como perfil
+- [x] Atualizar depoimentos com fotos do produto em uso como imagens do review
+- [x] Configurar vídeos da Shopee para abrir em modal/player ao clicar
+- [x] Testar depoimentos atualizados na página do produto
+- [x] Corrigir preço da Máquina de Solda de R$ 629,00 para R$ 89,90
+- [x] Reorganizar fotos dos depoimentos: pessoas no perfil, produto nas imagens do review
+- [x] Atualizar preços das variantes: Padrão R$ 89,57 e Arame Extra R$ 119,68
+- [x] Substituir imagens do carrossel do produto 22 pelas 9 imagens corretas da Dobevi
+- [x] Adicionar vídeo como primeiro item do carrossel do produto Máquina de Solda com autoplay
+- [x] Criar hook/contexto de escassez com contador de 60 unidades que diminui aleatoriamente
+- [x] Adicionar aviso de escassez na página do produto Máquina de Solda
+- [x] Adicionar aviso de escassez no checkout
+- [x] Redesenhar contador de escassez: mais chamativo, sem sobrepor timer de urgência
+- [x] Corrigir imagens dos order bumps no checkout (Arame Tubular, Máscara de Solda, Kit Bicos, Luvas)
+- [x] Adicionar maxLength nos campos do checkout (CPF, telefone, CEP, UF, etc.)
+- [x] Adicionar máscaras automáticas de formatação: CPF (000.000.000-00), Telefone ((00) 00000-0000), CEP (00000-000)
+- [x] Substituir integração de pagamento BYNET pela SIGILO PAY
+- [x] Configurar credenciais da Sigilo Pay como secrets
+- [x] Atualizar backend para usar API da Sigilo Pay
+- [x] Testar fluxo de pagamento PIX com Sigilo Pay
+- [x] Corrigir erro "Credenciais não fornecidas" no pagamento (env vars Sigilo Pay)
+- [x] Remover todos os arquivos e referências da BYNET do projeto
+- [x] Corrigir erro persistente de credenciais Sigilo Pay no Railway
+- [x] Revisar fluxo completo de pagamento para garantir que não há erros bloqueantes
+- [ ] Criar produto 23: novo produto com vídeo, escassez, depoimentos, order bumps, 120v/220v, R$89,57
+- [ ] Criar produto 24: novo produto com vídeo, escassez, depoimentos, order bumps, 120v/220v, R$89,57
+- [x] Adicionar depoimentos no checkout (2-3 depoimentos com foto de perfil, sem foto de depoimento)
+- [x] Adicionar selo de compra segura no checkout
+- [x] Adicionar seletor de quantidade no checkout
+- [x] Configurar vídeos autoplay para os 2 novos produtos
+- [x] Configurar escassez (60 unidades) para os 2 novos produtos
+- [x] Criar order bumps relevantes para os 2 novos produtos
+- [x] Criar produto 23 (Cooktop Elétrico Indução 5000W): vídeo, escassez, depoimentos checkout, selo, seletor qtd, order bumps, 120v/220v, R$89,57
+- [x] Corrigir imagens dos order bumps do Cooktop (produto 23)
+- [x] Corrigir erro "invalid product" / "Documento inválido" - adicionada validação CPF no backend + mensagens de erro amigáveis
+- [x] Scroll automático para campo com erro no checkout quando clicar em pagar (mobile-friendly)
+- [x] Melhorar player de vídeo mobile: botão grande ativar som, controles visíveis pausar/mutar
+- [x] Corrigir tracking UTMify: pedidos agora persistidos no banco de dados (sobrevive restarts do servidor)
+- [x] Adicionar script pixel TikTok UTMify no head de todas as páginas
+- [x] URGENTE: Corrigir erro "Erro ao processar o pagamento" - PIX não está sendo gerado para clientes reais
+- [x] URGENTE: Corrigir UTMify não recebendo eventos de compra/campanha
+- [x] Melhorar tratamento de erros da Sigilo Pay (mensagens amigáveis por tipo de erro)
+- [x] Corrigir arredondamento de ponto flutuante nos valores enviados à Sigilo Pay
+- [x] Corrigir port binding em produção (usar PORT exato, sem fallback)
+- [x] Adicionar logging detalhado para debug de pagamento e UTMify em produção
+- [x] Melhorar logging de erros UTMify (incluir status code e response body)
+- [x] Remover campo 'products' da requisição Sigilo Pay (causava erro 400 'Invalid products' com order bumps)
+- [x] Corrigir mapeamento de erros: GATEWAY_INVALID_ARGUMENT não é necessariamente CPF inválido
+- [x] Auditoria completa do código: backend (routers, sigilopay, utmify, db, schema)
+- [x] Auditoria completa do código: frontend (Checkout, PaymentPix, Cart, Product)
+- [x] Auditoria completa do código: configuração (env, index.ts, build, dependências)
+- [x] Verificar 0 erros em pagamento e API com testes reais
+- [x] Remover variável morta totalAmountReais do routers.ts
+- [x] Adicionar try/catch no response.json() do sigilopay.ts (proteção contra 502/503)
+- [x] Adicionar fallback no PaymentPix quando localStorage não tem dados PIX
+- [x] BUG: React error #300 ao clicar em voltar na página (navegação para trás) - hooks movidos antes do early return no ProductDetail.tsx
+- [x] Alterar timer do QR Code PIX para 30 minutos
+- [x] BUG: Evento de pagamento confirmado (paid) não está sendo enviado para UTMify quando cliente paga o PIX
+- [x] Implementar job de reconciliação periódica (a cada 2min) para detectar pagamentos confirmados
+- [x] Implementar webhook endpoint /api/webhook/sigilopay para receber callbacks de pagamento
+- [x] Implementar webhookHandler.ts para processar callbacks da Sigilo Pay
+- [x] Criar produto Kit 4 Blusas Baby Look com página no estilo cooktop
+- [x] Upload das imagens e vídeos do baby look para CDN (13 fotos produto + 8 perfis + 7 depoimentos)
+- [x] Adicionar categoria "Roupas" no menu/navegação
+- [x] Criar order bumps: Kit 2 blusas por R$19,90 e Kit 3 blusas por R$30,00
+- [x] Adicionar seção de tamanhos (P/M/G/GG) na página do produto (tabela guia de tamanhos)
+- [x] Adicionar depoimentos com fotos reais na página do baby look (8 depoimentos com fotos e vídeos)
+- [x] Order bumps de roupa: adicionar seletor P/M/G/GG ao lado do desconto
+- [x] Criar produto 25: Kit Calcinhas Cós Alto Sem Costura (R$19,90)
+- [x] Criar produto 26: Kit 4 Sutiãs Reforçados Plus Size (R$19,90)
+- [x] Criar produto 27: Kit 2 Calça Legging Feminina Suplex (R$29,90)
+- [x] Criar produto 28: Kit 3 Pijamas Baby Doll Short (R$29,90)
+- [x] Headline dinâmica na página do baby look: "Essa oferta só vai até HOJE DD/MM. Lote limitado!" (atualiza todo dia)
+- [x] BUG: Pixel UTMify erro "Cannot read properties of undefined (reading '_id')" na página /produto/24 - removido IC duplicado do proxy (pixel client-side já detecta automaticamente)
+- [x] Produto 24 (baby look): adicionar opções de cor (9 combinações: PRETO/MARROM/ROSA/LILAS, etc.)
+- [x] Bloquear checkout sem seleção de tamanho E cor com scroll automático para variações
+- [x] BUG: Chave React duplicada `24` no checkout (dois itens com mesmo id no carrinho) - corrigido key para usar idx+product.id+variations
+- [x] BUG: Erro UTMify "_id" no checkout - corrigido com fetch interceptor no index.html que garante lead={_id:null} quando API retorna resposta sem campo lead
+- [x] Adicionar logo do carrinho laranja no header e como favicon do site
+- [x] BUG: Botão "−" para diminuir/remover itens no resumo do pedido do Checkout não funciona - corrigido updateQuantity/removeItem para usar productId + selectedVariations (evita afetar outros itens com mesmo id mas variações diferentes)
+- [x] Adicionar 11 combinações de cores faltantes no produto 24 (Baby Look) - total agora: 20 opções de cor
+- [x] Substituir chips de cor por dropdown com scroll na página de produto - dropdown ativado quando há mais de 8 opções, chips mantidos para poucas opções (ex: tamanho)
+- [x] Criar produto 29: Rolo de Pintura com Reservatório Vonder (R$59,90, sem variações, 3 vídeos, 4 order bumps: 2x R$19,90 e 2x R$29,90)
+- [x] Investigar e corrigir envio de evento Purchase para TikTok e Facebook via UTMify - corrigido ECONNRESET no reconciler usando Pool de conexões mysql2 com keepAlive
+- [x] Produto 29: Adicionar headline dinâmica "Essa oferta só vai até HOJE DD/MM. Lote limitado!"- [x] Produto 29: Adicionar timer de urgência e contador de escassez (quase esgotando)
+- [x] Produto 29: Reordenar depoimentos - 4 homens primeiro (fotos reais enviadas), 4 mulheres depois
+- [x] Produto 29: Corrigir imagens dos order bumps - bandeja, fita crepe Tigre, lona azul, kit espátula+lixa+massa
+- [x] Criar pop-up de exit-intent com cupom de 5% de desconto nas páginas de produto - popup VOLTA5 com exit-intent, desconto aplicado no checkout e limpo após uso
+- [x] BUG: Exit-intent popup bloqueia botão de voltar na página do produto - corrigido z-index e botão voltar usa history.go(-2) quando estado exitIntent está ativo
+- [x] Adicionar exit-intent para mobile via detecção de botão voltar (popstate/history trick) - implementado em ExitIntentPopup.tsx
+- [x] Adicionar produto 29 (Rolo de Pintura Vonder) no carrossel de Ofertas Relâmpago da home
+- [x] Adicionar exit-intent popup com cupom VOLTA5 na página de Checkout
+- [x] BUG: Clicar em produto na home abre a página rolada para a seção de depoimentos em vez do topo - corrigido com ScrollToTop que executa window.scrollTo(0,0) a cada mudança de rota
+- [x] Exit-intent no Checkout: popup ao clicar em Voltar ou tentar sair, botão "Aplicar 5%" desconta automaticamente no resumo sem recarregar página
+- [x] Frete padrão no Checkout: Correios (grátis, 7-12 dias), Sedex (R$16,87, 4-7 dias), Jadlog (R$19,76, 3-6 dias) com logos reais para todos os produtos sem frete customizado
+- [x] Aumentar logos das transportadoras no checkout (Correios, Sedex, Jadlog) — altura h-10 com maxWidth 80px
+- [x] Popup de boas-vindas no checkout: aparece automaticamente ao entrar na página com mensagem de 5% de desconto ganho (WelcomeDiscountPopup verde, 1x por sessão)
