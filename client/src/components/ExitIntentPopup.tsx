@@ -2,9 +2,8 @@
  * ExitIntentPopup — aparece quando o usuário tenta sair da página
  *
  * Desktop: detecta mouse saindo pela parte superior da janela (mouseleave)
- * Mobile:  usa o "history trick" — empurra um estado extra no histórico ao montar,
- *          e quando o usuário aperta o botão Voltar do browser, o evento popstate
- *          dispara o popup em vez de navegar para a página anterior.
+ * Mobile:  usa um timer de 20s — evita o history trick que desincronizava o
+ *          histórico do router e travava a navegação do carrinho.
  *
  * forceShow: quando true, exibe o popup imediatamente (usado pelo botão Voltar do checkout).
  * onApply:   callback para aplicar o cupom diretamente no estado do pai (sem reload).
@@ -57,7 +56,7 @@ export default function ExitIntentPopup({
   const [visible, setVisible] = useState(forceShow);
   const [copied, setCopied] = useState(false);
   const [applied, setApplied] = useState(false);
-  const historyPushed = useRef(false);
+  const historyPushed = useRef(false); // mantido para compatibilidade com forceShow
 
   // Sincroniza quando forceShow muda para true
   useEffect(() => {
@@ -94,7 +93,7 @@ export default function ExitIntentPopup({
     };
   }, [enabled, handleMouseLeave]);
 
-  // ── Mobile: history trick ───────────────────────────────────────────────────
+  // ── Mobile: timer 20s (sem history trick para não quebrar navegação) ──────────
   useEffect(() => {
     if (!enabled) return;
     const isMobile = "ontouchstart" in window || navigator.maxTouchPoints > 0;
@@ -103,17 +102,12 @@ export default function ExitIntentPopup({
     const alreadyShown = sessionStorage.getItem(STORAGE_KEY_SHOWN);
     if (alreadyShown) return;
 
-    window.history.pushState({ exitIntent: true }, "");
-    historyPushed.current = true;
-
-    const handlePopState = (e: PopStateEvent) => {
-      if (e.state?.exitIntent) return;
+    const timer = setTimeout(() => {
       showPopup();
-    };
+    }, 20000);
 
-    window.addEventListener("popstate", handlePopState);
     return () => {
-      window.removeEventListener("popstate", handlePopState);
+      clearTimeout(timer);
     };
   }, [enabled, showPopup]);
 
@@ -122,10 +116,7 @@ export default function ExitIntentPopup({
     (navigateBack = false) => {
       setVisible(false);
       onClose?.();
-      if (navigateBack && historyPushed.current) {
-        historyPushed.current = false;
-        window.history.go(-1);
-      } else if (navigateBack && forceShow) {
+      if (navigateBack && forceShow) {
         // Popup aberto pelo botão Voltar do checkout — navega de volta
         window.history.back();
       }
