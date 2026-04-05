@@ -91,14 +91,7 @@ export async function createPixTransaction(
   if (input.metadata) body.metadata = input.metadata;
   if (input.callbackUrl) body.callbackUrl = input.callbackUrl;
 
-  console.log("[SigiloPay] Creating PIX transaction:", JSON.stringify({
-    identifier: body.identifier,
-    amount: body.amount,
-    shippingFee: body.shippingFee,
-    clientName: (body.client as any)?.name,
-    clientDoc: (body.client as any)?.document?.substring(0, 7) + '***',
-    productsCount: (body.products as any[])?.length,
-  }));
+  console.log(`[SigiloPay] Creating PIX transaction: identifier=${body.identifier}, amount=${body.amount}`);
 
   const response = await fetch(`${SIGILO_PAY_BASE_URL}/gateway/pix/receive`, {
     method: "POST",

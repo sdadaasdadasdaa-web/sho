@@ -239,8 +239,7 @@ export const appRouter = router({
           // Não bloquear o pagamento se o DB falhar
         }
 
-        // Log dos tracking params para debug
-        console.log(`[UTMify] TrackingParams for ${externalRef}:`, JSON.stringify(input.trackingParams));
+        // Tracking params processados (log omitido — contém dados de marketing sensíveis)
 
         // Enviar evento "waiting_payment" para UTMify (fire-and-forget)
         sendUtmifyPendingOrder({

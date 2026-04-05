@@ -183,9 +183,10 @@ export default function Checkout() {
   // tRPC mutation for creating PIX payment
   const createPixMutation = trpc.payment.createPix.useMutation({
     onSuccess: (data) => {
-      // Save PIX data to localStorage for the payment page
+      // Save PIX data to sessionStorage for the payment page
+      // sessionStorage is cleared when the tab closes (safer than localStorage)
       if (data.pix) {
-        localStorage.setItem(
+        sessionStorage.setItem(
           `pix_${data.transactionId}`,
           JSON.stringify({
             qrCode: data.pix.qrCode,

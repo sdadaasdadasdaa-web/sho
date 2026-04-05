@@ -41,7 +41,7 @@ async function startServer() {
   // Webhook da Sigilo Pay para notificação de pagamento
   app.post("/api/webhook/sigilopay", async (req, res) => {
     try {
-      console.log("[Webhook] Received Sigilo Pay callback:", JSON.stringify(req.body));
+      console.log("[Webhook] Received Sigilo Pay callback for txn:", req.body?.transactionId || req.body?.id || "unknown");
       await processWebhookPayment(req.body);
       res.status(200).json({ success: true });
     } catch (err) {

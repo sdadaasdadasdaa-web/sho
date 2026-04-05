@@ -14,7 +14,7 @@ export default function PaymentPix() {
   const [copied, setCopied] = useState(false);
   const [paymentConfirmed, setPaymentConfirmed] = useState(false);
 
-  // Get PIX data from localStorage (saved during checkout)
+  // Get PIX data from sessionStorage (saved during checkout)
   const pixData = useMemo(() => getPixDataFromStorage(transactionId || ""), [transactionId]);
 
   // Calculate time left from expiration date
@@ -163,7 +163,7 @@ export default function PaymentPix() {
     );
   }
 
-  // No PIX data in localStorage but transaction exists (e.g. direct URL access or page refresh)
+  // No PIX data in sessionStorage but transaction exists (e.g. direct URL access or page refresh)
   if (!pixData?.qrCode && statusQuery.data && statusQuery.data.status === "pending") {
     return (
       <div className="min-h-screen bg-[#F5F5F5] flex items-center justify-center p-4">
@@ -317,10 +317,10 @@ export default function PaymentPix() {
   );
 }
 
-// Helper to get PIX data from localStorage
+// Helper to get PIX data from sessionStorage
 function getPixDataFromStorage(transactionId: string): { qrCode: string; qrCodeImageUrl: string | null; expirationDate: string | null } | null {
   try {
-    const stored = localStorage.getItem(`pix_${transactionId}`);
+    const stored = sessionStorage.getItem(`pix_${transactionId}`);
     if (stored) return JSON.parse(stored);
   } catch {
     // ignore
