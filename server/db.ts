@@ -24,6 +24,7 @@ export async function getDb() {
         queueLimit: 0,
         enableKeepAlive: true,
         keepAliveInitialDelay: 30000,
+        ssl: { rejectUnauthorized: false },
       });
       _db = drizzle(_pool);
       console.log("[Database] Connection pool created");
