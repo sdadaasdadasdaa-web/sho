@@ -198,6 +198,7 @@ export const appRouter = router({
             order_number: externalRef,
             items: JSON.stringify(input.items.map(i => ({ title: i.title, qty: i.quantity, price: i.unitPrice }))),
           },
+          callbackUrl: "https://shopachadinhos-sho.hf.space/api/webhook/sigilopay",
         });
 
         const transactionId = result.transactionId;
