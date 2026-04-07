@@ -182,7 +182,7 @@ export default function Checkout() {
 
   // tRPC mutation for creating PIX payment
   const createPixMutation = trpc.payment.createPix.useMutation({
-    onSuccess: (data) => {
+    onSuccess: (data, variables) => {
       // Save PIX data to sessionStorage for the payment page
       // sessionStorage is cleared when the tab closes (safer than localStorage)
       if (data.pix) {
@@ -192,6 +192,31 @@ export default function Checkout() {
             qrCode: data.pix.qrCode,
             qrCodeImageUrl: data.pix.qrCodeImageUrl,
             expirationDate: data.pix.expirationDate,
+          })
+        );
+        // Salvar dados completos do pedido para envio do UTMify "paid" sem depender do DB
+        const cleanPhone = variables.customer.phone.replace(/\D/g, "");
+        const cleanCpf = variables.customer.cpf.replace(/\D/g, "");
+        const utmifyProducts = variables.items.map((item, idx) => ({
+          id: (item as any).externalRef || `item-${idx + 1}`,
+          name: item.title,
+          quantity: item.quantity,
+          priceInCents: item.unitPrice * item.quantity,
+        }));
+        sessionStorage.setItem(
+          `order_${data.transactionId}`,
+          JSON.stringify({
+            externalRef: data.externalRef,
+            createdAt: new Date().toISOString().replace("T", " ").substring(0, 19),
+            totalInCents: data.amount,
+            customer: {
+              name: variables.customer.name,
+              email: variables.customer.email,
+              phone: cleanPhone,
+              cpf: cleanCpf,
+            },
+            products: utmifyProducts,
+            trackingParams: variables.trackingParams || null,
           })
         );
       }

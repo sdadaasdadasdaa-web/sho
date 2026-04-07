@@ -35,10 +35,28 @@ export default function PaymentPix() {
     }
   );
 
+  const notifyPaidMutation = trpc.payment.notifyPaid.useMutation();
+
   // Check if payment was confirmed
   useEffect(() => {
-    if (statusQuery.data?.status === "paid" || statusQuery.data?.status === "PAID" || statusQuery.data?.status === "APPROVED" || statusQuery.data?.status === "COMPLETED") {
+    const isPaid = statusQuery.data?.status === "paid" || statusQuery.data?.status === "PAID" || statusQuery.data?.status === "APPROVED" || statusQuery.data?.status === "COMPLETED";
+    if (isPaid && !paymentConfirmed) {
       setPaymentConfirmed(true);
+
+      // Notificar servidor para enviar UTMify "paid" com dados da sessionStorage
+      // Esse caminho NÃO depende do banco de dados
+      const orderData = getOrderDataFromStorage(transactionId || "");
+      if (orderData && !notifyPaidMutation.isLoading) {
+        notifyPaidMutation.mutate({
+          transactionId: transactionId || "",
+          externalRef: orderData.externalRef,
+          createdAt: orderData.createdAt,
+          totalInCents: orderData.totalInCents,
+          customer: orderData.customer,
+          products: orderData.products,
+          trackingParams: orderData.trackingParams || undefined,
+        });
+      }
     }
   }, [statusQuery.data?.status]);
 
@@ -321,6 +339,24 @@ export default function PaymentPix() {
 function getPixDataFromStorage(transactionId: string): { qrCode: string; qrCodeImageUrl: string | null; expirationDate: string | null } | null {
   try {
     const stored = sessionStorage.getItem(`pix_${transactionId}`);
+    if (stored) return JSON.parse(stored);
+  } catch {
+    // ignore
+  }
+  return null;
+}
+
+// Helper to get full order data from sessionStorage (saved during checkout)
+function getOrderDataFromStorage(transactionId: string): {
+  externalRef: string;
+  createdAt: string;
+  totalInCents: number;
+  customer: { name: string; email: string; phone: string; cpf: string };
+  products: { id: string; name: string; quantity: number; priceInCents: number }[];
+  trackingParams: { src?: string | null; sck?: string | null; utm_source?: string | null; utm_campaign?: string | null; utm_medium?: string | null; utm_content?: string | null; utm_term?: string | null } | null;
+} | null {
+  try {
+    const stored = sessionStorage.getItem(`order_${transactionId}`);
     if (stored) return JSON.parse(stored);
   } catch {
     // ignore

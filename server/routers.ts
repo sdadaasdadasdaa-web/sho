@@ -273,6 +273,87 @@ export const appRouter = router({
         };
       }),
 
+    // Conjunto em memória para deduplicação imediata (evita race condition quando
+    // frontend e webhook chegam ao mesmo tempo)
+    notifyPaid: publicProcedure
+      .input(z.object({
+        transactionId: z.string(),
+        externalRef: z.string(),
+        createdAt: z.string(),
+        totalInCents: z.number().int(),
+        customer: z.object({
+          name: z.string(),
+          email: z.string(),
+          phone: z.string(),
+          cpf: z.string(),
+        }),
+        products: z.array(z.object({
+          id: z.string(),
+          name: z.string(),
+          quantity: z.number().int(),
+          priceInCents: z.number().int(),
+        })),
+        trackingParams: z.object({
+          src: z.string().nullable().optional(),
+          sck: z.string().nullable().optional(),
+          utm_source: z.string().nullable().optional(),
+          utm_campaign: z.string().nullable().optional(),
+          utm_medium: z.string().nullable().optional(),
+          utm_content: z.string().nullable().optional(),
+          utm_term: z.string().nullable().optional(),
+        }).nullable().optional(),
+      }))
+      .mutation(async ({ input }) => {
+        // Verificar se já foi processado no banco (deduplicação)
+        try {
+          const db = await getDb();
+          if (db) {
+            const orderRows = await db.select().from(orders)
+              .where(eq(orders.transactionId, input.transactionId))
+              .limit(1);
+            if (orderRows.length > 0 && orderRows[0].status !== "pending") {
+              console.log(`[NotifyPaid] Order ${input.externalRef} already processed (status=${orderRows[0].status}), skipping`);
+              return { success: true, alreadyProcessed: true };
+            }
+          }
+        } catch (dbErr) {
+          // DB indisponível — prosseguir mesmo assim para não perder o evento
+          console.warn("[NotifyPaid] DB check failed, proceeding anyway:", (dbErr as any)?.message);
+        }
+
+        console.log(`[NotifyPaid] Sending UTMify paid event for ${input.externalRef} (txn: ${input.transactionId})`);
+
+        const result = await sendUtmifyPaidOrder({
+          orderId: input.externalRef,
+          createdAt: input.createdAt,
+          customer: input.customer,
+          products: input.products,
+          totalInCents: input.totalInCents,
+          trackingParams: input.trackingParams || undefined,
+        });
+
+        if (result.success) {
+          console.log(`[NotifyPaid] UTMify paid event sent successfully for ${input.externalRef}`);
+        } else {
+          console.error(`[NotifyPaid] UTMify failed for ${input.externalRef}: ${result.error}`);
+        }
+
+        // Atualizar banco (fire-and-forget — não bloqueia resposta ao cliente)
+        getDb().then(async (db) => {
+          if (!db) return;
+          try {
+            await db.update(orders)
+              .set({ status: "paid", paidAt: new Date() })
+              .where(eq(orders.transactionId, input.transactionId));
+            console.log(`[NotifyPaid] Order ${input.externalRef} marked as paid in DB`);
+          } catch (e) {
+            console.warn("[NotifyPaid] DB update failed (non-critical):", (e as any)?.message);
+          }
+        }).catch(() => {});
+
+        return { success: result.success, error: result.error || null };
+      }),
+
     checkStatus: publicProcedure
       .input(z.object({ transactionId: z.string() }))
       .query(async ({ input }) => {
