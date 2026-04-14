@@ -188,6 +188,29 @@ export default function ProductDetail() {
           </div>
         </div>
 
+        {/* Mobile urgency top bar — visível imediatamente, antes de qualquer scroll */}
+        <div className="md:hidden mx-3 mb-2 rounded-lg overflow-hidden shadow-sm">
+          <div className="flex items-center justify-between px-3 py-2 text-white text-xs font-bold" style={{ background: "#EE4D2D" }}>
+            <span>⚡ OFERTA RELÂMPAGO — HOJE</span>
+            <span className="bg-white text-[#EE4D2D] px-2 py-0.5 rounded-full text-[10px] font-extrabold">
+              {product.discount}% OFF
+            </span>
+          </div>
+          <div className="bg-white flex items-center justify-between px-3 py-2.5 border border-orange-100">
+            <div>
+              <p className="text-[10px] text-gray-400 line-through">{formatPrice(product.originalPrice)}</p>
+              <p className="text-xl font-extrabold" style={{ color: "#EE4D2D" }}>{formatPrice(currentPrice)}</p>
+            </div>
+            <button
+              onClick={handleBuyNow}
+              className="px-5 py-2.5 rounded text-white font-extrabold text-sm shadow-md active:scale-95 transition-transform"
+              style={{ background: "#EE4D2D" }}
+            >
+              Comprar Agora →
+            </button>
+          </div>
+        </div>
+
         {/* Product main section */}
         <div className="container">
           <div className="bg-white rounded-sm overflow-hidden">
@@ -374,8 +397,8 @@ export default function ProductDetail() {
                   )}
                 </div>
 
-                {/* Headline dinâmica de urgência — produtos 24 e 29 */}
-                {(product.id === 24 || product.id === 29) && (() => {
+                {/* Headline dinâmica de urgência — produtos 24, 29 e 30 */}
+                {(product.id === 24 || product.id === 29 || product.id === 30) && (() => {
                   const hoje = new Date();
                   const dia = hoje.getDate().toString().padStart(2, '0');
                   const mes = (hoje.getMonth() + 1).toString().padStart(2, '0');
@@ -393,7 +416,7 @@ export default function ProductDetail() {
                 <div className="mt-2 rounded overflow-hidden">
                   <UrgencyTimer variant="product" durationMinutes={30} productId={product.id} />
                   {/* Contador de escassez — barra separada */}
-                  {(product.id === 22 || product.id === 23 || product.id === 24 || product.id === 29) && (
+                  {(product.id === 22 || product.id === 23 || product.id === 24 || product.id === 29 || product.id === 30) && (
                     <ScarcityBadge variant="product" />
                   )}
                   {/* Price */}
@@ -465,6 +488,14 @@ export default function ProductDetail() {
                                   [variation.label]: option,
                                 }));
                                 setVariationErrors((prev) => ({ ...prev, [variation.label]: false }));
+                                if (variation.optionImages?.[option]) {
+                                  const imgUrl = variation.optionImages[option];
+                                  const idx = product.images.indexOf(imgUrl);
+                                  if (idx >= 0) {
+                                    setCurrentImage(idx);
+                                    setShowVideo(false);
+                                  }
+                                }
                               }}
                               className={`px-4 py-2 text-sm rounded border transition-all ${
                                 isSelected

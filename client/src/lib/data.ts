@@ -16,6 +16,7 @@ export interface Product {
     label: string;
     options: string[];
     prices?: number[];
+    optionImages?: Record<string, string>; // mapa opção → URL da imagem
   }[];
 }
 
@@ -832,6 +833,54 @@ export const products: Product[] = [
     variations: [],
   },
   {
+    id: 30,
+    name: "Kit Fixadora Finca Pino Pistola Profissional + 200 pinos 27mm — Fixação Precisa e Sem Esforço",
+    price: 49.90,
+    originalPrice: 199.90,
+    discount: 75,
+    image: "https://down-br.img.susercontent.com/file/sg-11134201-82605-mke06f8ohc775d",
+    images: [
+      "https://down-br.img.susercontent.com/file/sg-11134201-82605-mke06f8ohc775d",
+      "https://down-br.img.susercontent.com/file/sg-11134201-8262h-mke06hs6m39je0",
+      "https://down-br.img.susercontent.com/file/sg-11134201-8262h-mke06ka3p9ms19",
+      "https://down-br.img.susercontent.com/file/sg-11134201-8260r-mke06nal0oaw92",
+      "https://down-br.img.susercontent.com/file/sg-11134201-8261o-mke06o4gpurn10",
+      "https://down-br.img.susercontent.com/file/sg-11134201-82604-mke06w81rs3na8",
+      "https://down-br.img.susercontent.com/file/sg-11134201-82605-mke06x2gju9y8c",
+      "https://down-br.img.susercontent.com/file/sg-11134201-8261d-mke06z168a9v1a",
+      "https://down-br.img.susercontent.com/file/sg-11134201-8262a-mke06xr08miq45",
+      "https://down-br.img.susercontent.com/file/sg-11134201-8261c-mke070jtb20z7c",
+      "https://down-br.img.susercontent.com/file/sg-11134201-8262l-mke071f3asxx34",
+      "https://down-br.img.susercontent.com/file/sg-11134201-82606-mke06zmq8a9x11",
+    ],
+    rating: 5.0,
+    sold: 8743,
+    freeShipping: true,
+    category: "Ferramentas",
+    description: "🔫 KIT FIXADORA FINCA PINO PISTOLA PROFISSIONAL — A ferramenta que todo construtor e marceneiro precisa!\n\nA Pistola Finca Pino Semiautomática que crava pregos de 27mm com precisão e velocidade, sem martelar, sem machucar a mão, sem vibração excessiva. Ideal para fixar rodapés, forros, ripas, madeiras, OSB, gesso e muito mais!\n\n📦 O KIT COMPLETO INCLUI:\n✅ 1x Pistola Finca Pino Semiautomática profissional\n✅ 1x Escova de Limpeza para manutenção\n✅ 1x Óculos de Proteção para segurança\n✅ 1x Maleta de Transporte resistente\n✅ 3x Modelos de Mola para ajuste da força de disparo\n✅ 1x Óleo Lubrificante para manutenção\n✅ 1x Agulha de Limpeza para perfeito funcionamento\n✅ 1x Pino Trava para segurança adicional\n✅ 200 Pinos de 27mm para começar agora!\n\n🎯 CARACTERÍSTICAS TÉCNICAS:\n• Calibre: 27mm (padrão universal)\n• Tipo: Semiautomática ação simples\n• Material: Metal reforçado com empunhadura ergonômica\n• Arruela cônica compatível: 27mm\n• Compatível com pinos de 27mm do mercado\n\n🏗️ APLICAÇÕES:\n• Rodapés e guarnições\n• Forros de madeira e PVC\n• Ripas e caibros finos\n• Gesso acartonado (Drywall)\n• OSB e madeiras em geral\n• Marcenaria e carpintaria\n\n⚡ POR QUE ESCOLHER A FINCA PINO?\n• Crava com 1 tiro sem martelo\n• Acabamento limpo e preciso\n• Não amassa nem danifica a superfície\n• 3x mais rápido que martelo\n• Reduz fadiga muscular em 70%\n\n📦 Postagem em até 1 dia útil | Garantia de 12 meses",
+    specifications: [
+      { label: "Calibre", value: "27mm (padrão universal)" },
+      { label: "Tipo", value: "Semiautomática ação simples" },
+      { label: "Pinos inclusos", value: "200 pinos de 27mm" },
+      { label: "Modelos de Mola", value: "3 modelos para ajuste de força" },
+      { label: "Acessórios", value: "Óculos, escova, óleo, agulha, maleta" },
+      { label: "Aplicação", value: "Rodapés, forros, ripas, drywall, OSB" },
+      { label: "Garantia", value: "12 meses" },
+      { label: "Postagem", value: "Até 1 dia útil" },
+    ],
+    variations: [
+      {
+        label: "Cor",
+        options: ["Verde", "Vermelho", "Laranja"],
+        optionImages: {
+          "Verde": "https://down-br.img.susercontent.com/file/sg-11134201-82604-mke06w81rs3na8",
+          "Vermelho": "https://down-br.img.susercontent.com/file/sg-11134201-82605-mke06x2gju9y8c",
+          "Laranja": "https://down-br.img.susercontent.com/file/sg-11134201-8261d-mke06z168a9v1a",
+        },
+      },
+    ],
+  },
+  {
     id: 25,
     name: "Kit com 10 Calcinhas Cós Alto SEM COSTURA Corte a Laser Conforto Não Marca Forro 100% Algodão",
     price: 19.90,
@@ -977,6 +1026,7 @@ export const productVideos: Record<number, string> = {
   23: "https://d2xsxph8kpxj0f.cloudfront.net/310519663285681492/T9MpEVnAhq2PrGidiTemVi/cooktop-demo_8a5f3833.mp4",
   24: "https://down-zl-br.vod.susercontent.com/api/v4/11110103/mms/br-11110103-6v65g-mkxutjexf8xv3c.16000051771592550.mp4",
   29: "https://d2xsxph8kpxj0f.cloudfront.net/310519663285681492/T9MpEVnAhq2PrGidiTemVi/front_d757d2e7.mp4",
+  30: "https://down-ws-br.vod.susercontent.com/api/v4/11110105/mms/br-11110105-6kfks-m6mfyy8yxjrb58.16000081740392337.mp4",
 };
 
 // Depoimentos / Avaliações de clientes
@@ -1444,6 +1494,77 @@ export const productReviews: Record<number, Review[]> = {
       ],
     },
   ],
+  30: [
+    {
+      id: 1,
+      name: "Maria B.",
+      rating: 5,
+      date: "05/04/2026",
+      text: "Eu aaamei muito!! Bem fácil de usar (com muito cuidado rsrs). Cravo rodapé em segundos, sem martelo, sem esforço. Chegou certinho na maleta com tudo incluso. Já indiquei pra minha cunhada!",
+      verified: true,
+      profileImage: "https://d2xsxph8kpxj0f.cloudfront.net/310519663285681492/T9MpEVnAhq2PrGidiTemVi/perfil3_9009a25a.jpg",
+      images: [
+        "https://down-br.img.susercontent.com/file/br-11134103-820ma-mmrratrovcap1e",
+      ],
+      videoUrl: "https://down-tx-br.vod.susercontent.com/api/v4/11110103/mms/br-11110103-6v6x5-mmrra3due8e8d4.16000051775581891.mp4",
+    },
+    {
+      id: 2,
+      name: "Nilsa S.",
+      rating: 5,
+      date: "04/04/2026",
+      text: "Ainda não usei mas o produto chegou impecável! Embalagem excelente, maleta resistente, óculos de proteção inclusos. Comprei pra fazer a reforma do meu quarto. Assim que usar coloco mais fotos!",
+      verified: true,
+      profileImage: "https://d2xsxph8kpxj0f.cloudfront.net/310519663285681492/T9MpEVnAhq2PrGidiTemVi/perfil5_80295b58.jpg",
+      images: [
+        "https://down-br.img.susercontent.com/file/br-11134103-820lv-mmqo9qxe09vr43",
+        "https://down-br.img.susercontent.com/file/br-11134103-820lj-mmqo9qxe1og74b",
+      ],
+      videoUrl: "https://down-tx-br.vod.susercontent.com/api/v4/11110103/mms/br-11110103-6v6x7-mmqrrfkuymf861.16000051775522146.mp4",
+    },
+    {
+      id: 3,
+      name: "Adriana G.",
+      rating: 5,
+      date: "02/04/2026",
+      text: "Meu marido adorou! Muito bom mas tem que tomar cuidado porque a pressão é muito forte — crava direto. Usou pra colocar rodapé em toda a sala e ficou perfeito. Recomendo muito, entregou antes do prazo!",
+      verified: true,
+      profileImage: "https://d2xsxph8kpxj0f.cloudfront.net/310519663285681492/T9MpEVnAhq2PrGidiTemVi/perfil5_80295b58.jpg",
+    },
+    {
+      id: 4,
+      name: "Saulo M.",
+      rating: 5,
+      date: "01/04/2026",
+      text: "Chegou tudo certo, dentro do prazo. Maleta de transporte top, óculos de proteção inclusos, os 200 pinos já vieram no kit. Produto com ótimo acabamento, pistola bem feita. Nota máxima!",
+      verified: true,
+      profileImage: "https://d2xsxph8kpxj0f.cloudfront.net/310519663285681492/T9MpEVnAhq2PrGidiTemVi/homem1_b5de8162.jpg",
+    },
+    {
+      id: 5,
+      name: "Ricardo P.",
+      rating: 5,
+      date: "29/03/2026",
+      text: "Sou carpinteiro e uso essa pistola todo dia. A economia de tempo é absurda — o que levava 30 minutos com martelo faço em 5 minutos. A maleta facilita muito o transporte. Produto de primeira qualidade!",
+      verified: true,
+      profileImage: "https://d2xsxph8kpxj0f.cloudfront.net/310519663285681492/T9MpEVnAhq2PrGidiTemVi/homem2_d3f17fe4.jpg",
+      images: [
+        "https://down-br.img.susercontent.com/file/sg-11134201-8262a-mke06xr08miq45",
+      ],
+    },
+    {
+      id: 6,
+      name: "Carla F.",
+      rating: 5,
+      date: "25/03/2026",
+      text: "Comprei pra meu marido de presente e ele ficou super feliz! Usou para colocar o forro PVC no banheiro e ficou lindo. A pistola é resistente e encaixa os pinos perfeitamente. Super recomendo!",
+      verified: true,
+      profileImage: "https://d2xsxph8kpxj0f.cloudfront.net/310519663285681492/T9MpEVnAhq2PrGidiTemVi/perfil1_a52a63bc.jpg",
+      images: [
+        "https://down-br.img.susercontent.com/file/sg-11134201-8261c-mke070jtb20z7c",
+      ],
+    },
+  ],
 };
 
 // Order Bump items - produtos complementares sugeridos no checkout
@@ -1763,6 +1884,9 @@ export const roupasProducts: Product[] = [
 
 // Função para obter order bumps baseado nos itens do carrinho
 export function getOrderBumpsForCart(productIds: number[]): OrderBumpItem[] {
+  if (productIds.includes(30)) {
+    return fincaPinoOrderBumps;
+  }
   if (productIds.includes(29)) {
     return roloOrderBumps;
   }
@@ -1780,6 +1904,29 @@ export function getOrderBumpsForCart(productIds: number[]): OrderBumpItem[] {
   }
   return defaultOrderBumps;
 }
+
+// Order bumps específicos para Finca Pino
+export const fincaPinoOrderBumps: OrderBumpItem[] = [
+  {
+    id: 701,
+    name: "Kit 100/200/300/400 Pinos Para Pistola Finca Pino Arruela 27mm Cônica",
+    price: 19.90,
+    originalPrice: 49.90,
+    discount: 60,
+    image: "https://down-br.img.susercontent.com/file/sg-11134201-82606-mke06zmq8a9x11",
+    shortDescription: "Pinos de 27mm com arruela cônica universais. Compatível com sua pistola Finca Pino.",
+    sizes: ["100 pinos", "200 pinos", "300 pinos", "400 pinos"],
+  },
+  {
+    id: 702,
+    name: "1x Pistola Finca Pino Extra — Tenha Uma Sobressalente",
+    price: 29.90,
+    originalPrice: 79.90,
+    discount: 63,
+    image: "https://down-br.img.susercontent.com/file/sg-11134201-82605-mke06f8ohc775d",
+    shortDescription: "Pistola Finca Pino Profissional extra. Para ter sempre uma reserva ou presentear.",
+  },
+];
 
 // Order bumps específicos para Rolo de Pintura com Reservatório Vonder
 export const roloOrderBumps: OrderBumpItem[] = [

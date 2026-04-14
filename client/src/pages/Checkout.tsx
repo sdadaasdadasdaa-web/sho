@@ -416,12 +416,42 @@ export default function Checkout() {
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
               {/* Form */}
               <div className="lg:col-span-2 space-y-4">
+                {/* Headline de urgência — Finca Pino */}
+                {productIds.includes(30) && (() => {
+                  const hoje = new Date();
+                  const dia = hoje.getDate().toString().padStart(2, '0');
+                  const mes = (hoje.getMonth() + 1).toString().padStart(2, '0');
+                  return (
+                    <div className="rounded-lg overflow-hidden border-2 border-red-500 bg-red-600 px-4 py-2.5 flex items-center justify-center gap-2 animate-pulse">
+                      <span className="text-white text-sm font-extrabold tracking-wide text-center">
+                        🔥 Essa oferta só vai até HOJE {dia}/{mes}. Lote limitado!
+                      </span>
+                    </div>
+                  );
+                })()}
                 {/* Timer de Urgência */}
                 <UrgencyTimer variant="checkout" durationMinutes={30} />
                 {/* Contador de escassez */}
-                {(productIds.includes(22) || productIds.includes(23)) && (
+                {(productIds.includes(22) || productIds.includes(23) || productIds.includes(30)) && (
                   <ScarcityBadge variant="checkout" />
                 )}
+                {/* Banner de entrega */}
+                <div className="rounded-lg overflow-hidden shadow-sm" style={{ background: "#EE4D2D" }}>
+                  <div className="flex items-center justify-between px-5 py-4 relative">
+                    <div className="relative z-10">
+                      <p className="text-white font-extrabold text-xl md:text-2xl leading-tight uppercase tracking-wide drop-shadow">
+                        ENTREGO TUDO<br />RAPIDINHO<br />NA SUA CASA
+                      </p>
+                    </div>
+                    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+                      <div className="absolute top-0 bottom-0 right-1/3 w-16 bg-white/20 skew-x-[-12deg]" />
+                    </div>
+                    <div className="text-right relative z-10 text-5xl md:text-6xl">
+                      🚐
+                    </div>
+                  </div>
+                </div>
+
                 {/* Contact */}
                 <div className="bg-white rounded-sm p-4 md:p-6">
                   <h2 className="text-base font-bold text-gray-800 mb-4 flex items-center gap-2">

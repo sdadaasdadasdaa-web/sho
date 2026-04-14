@@ -10,49 +10,12 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,300;0,6..12,400;0,6..12,500;0,6..12,600;0,6..12,700;0,6..12,800;0,6..12,900;1,6..12,400&display=swap" rel="stylesheet" />
-    <!-- UTMify Fetch Interceptor: previne crash quando API retorna resposta sem campo 'lead' -->
-    <script>
-      (function() {
-        var _originalFetch = window.fetch;
-        window.fetch = function(url, options) {
-          return _originalFetch.apply(this, arguments).then(function(response) {
-            var urlStr = (typeof url === 'string' ? url : (url && url.url)) || '';
-            if (urlStr.indexOf('tracking.utmify.com.br') !== -1) {
-              var cloned = response.clone();
-              return cloned.json().then(function(data) {
-                if (data && typeof data === 'object' && !data.lead) {
-                  data.lead = { _id: null };
-                }
-                return new Response(JSON.stringify(data), {
-                  status: response.status,
-                  statusText: response.statusText,
-                  headers: response.headers
-                });
-              }).catch(function() { return response; });
-            }
-            return response;
-          });
-        };
-      })();
-    </script>
     <!-- UTMify Pixel -->
-    <script>
-      window.pixelId = "69251f2e83c0b0e4729553f9";
-      var a = document.createElement("script");
-      a.setAttribute("async", "");
-      a.setAttribute("defer", "");
-      a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel.js");
-      document.head.appendChild(a);
-    </script>
+    <script>window.pixelId = "69251f2e83c0b0e4729553f9";</script>
+    <script async defer src="https://cdn.utmify.com.br/scripts/pixel/pixel.js"></script>
     <!-- UTMify Pixel TikTok -->
-    <script>
-      window.tikTokPixelId = "69c1d6bdb1f8e821597c4a43";
-      var b = document.createElement("script");
-      b.setAttribute("async", "");
-      b.setAttribute("defer", "");
-      b.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel-tiktok.js");
-      document.head.appendChild(b);
-    </script>
+    <script>window.tikTokPixelId = "69c1d6bdb1f8e821597c4a43";</script>
+    <script async defer src="https://cdn.utmify.com.br/scripts/pixel/pixel-tiktok.js"></script>
     <script
       src="https://cdn.utmify.com.br/scripts/utms/latest.js"
       data-utmify-prevent-xcod-sck

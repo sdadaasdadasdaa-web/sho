@@ -1,0 +1,40 @@
+{
+  "name": "sho",
+  "billing": {
+    "deploymentPlan": "nf-compute-200"
+  },
+  "deployment": {
+    "instances": 1
+  },
+  "buildSettings": {
+    "dockerfile": {
+      "buildContext": "/",
+      "dockerFilePath": "/Dockerfile",
+      "dockerWorkDir": "/",
+      "useCache": false
+    }
+  },
+  "runtimeEnvironment": {
+    "NODE_ENV": "production",
+    "PORT": "3000",
+    "DATABASE_URL": "mysql://uvi9gnmdwlqowyhw:IYFeVBHm2UrfZSNEDeC6@b9bvyxspxbgvcveen4w8-mysql.services.clever-cloud.com:3306/b9bvyxspxbgvcveen4w8",
+    "JWT_SECRET": "e48431f81e7cfdbc1b6ee664bae8d6a3fb9616546c517915272633892b67c304",
+    "SIGILO_PAY_PUBLIC_KEY": "jefersonofi8-0-5_8wzfmv6ocw6msb8e",
+    "SIGILO_PAY_SECRET_KEY": "iaaqj8y44w5f7fos4noshebn70afkp5o12k0h16b20e9rtgkw8ajw2h7segtss09",
+    "UTMIFY_API_TOKEN": "oZfYDiTBLfgN2P0UwzQimtHaMg0QJ7PUL43R"
+  },
+  "vcsData": {
+    "projectUrl": "https://github.com/sdadaasdadasdaa-web/sho",
+    "projectType": "github",
+    "accountLogin": "sdadaasdadasdaa-web",
+    "projectBranch": "main"
+  },
+  "ports": [
+    {
+      "name": "port01",
+      "internalPort": 3000,
+      "protocol": "HTTP",
+      "public": true
+    }
+  ]
+}
